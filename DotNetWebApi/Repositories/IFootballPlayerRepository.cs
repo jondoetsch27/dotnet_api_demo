@@ -8,8 +8,9 @@ namespace dotnet_api_demo.Repositories
     {
         Task<IEnumerable<FootballPlayerModel>> GetAllAsync();
         Task<FootballPlayerModel?> GetByIdAsync(string id);
-        Task CreateAsync(FootballPlayerModel player);
+        Task<bool> CreateAsync(FootballPlayerModel player);
         Task<bool> UpdateAsync(string id, FootballPlayerModel player);
         Task<bool> DeleteAsync(string id);
+        Task<bool> CreateManyAsync(List<FootballPlayerModel> players);
     }
 }

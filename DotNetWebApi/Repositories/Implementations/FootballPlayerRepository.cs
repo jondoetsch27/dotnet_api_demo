@@ -12,7 +12,7 @@ namespace dotnet_api_demo.Repositories.Implementations
 
         public FootballPlayerRepository(IMongoClient mongoClient)
         {
-            var database = mongoClient.GetDatabase("YourDatabaseName");
+            var database = mongoClient.GetDatabase("Testing");
             _footballPlayers = database.GetCollection<FootballPlayerModel>("FootballPlayers");
         }
 
@@ -26,9 +26,10 @@ namespace dotnet_api_demo.Repositories.Implementations
             return await _footballPlayers.Find(p => p.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task CreateAsync(FootballPlayerModel player)
+        public async Task<bool> CreateAsync(FootballPlayerModel player)
         {
             await _footballPlayers.InsertOneAsync(player);
+            return true;
         }
 
         public async Task<bool> UpdateAsync(string id, FootballPlayerModel player)
@@ -41,6 +42,12 @@ namespace dotnet_api_demo.Repositories.Implementations
         {
             var result = await _footballPlayers.DeleteOneAsync(p => p.Id == id);
             return result.DeletedCount > 0;
+        }
+
+        public async Task<bool> CreateManyAsync(List<FootballPlayerModel> players)
+        {
+            await _footballPlayers.InsertManyAsync(players);
+            return true;
         }
     }
 }

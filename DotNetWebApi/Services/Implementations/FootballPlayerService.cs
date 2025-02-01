@@ -1,40 +1,50 @@
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using dotnet_api_demo.Models;
+using dotnet_api_demo.Repositories;
+using dotnet_api_demo.Services;
 
-namespace dotnet_api_demo.Services.Implementations 
-{ 
+namespace dotnet_api_demo.Services
+{
     public class FootballPlayerService : IFootballPlayerService
     {
-        // Stubbed method to get details about a specific player by player ID.
-        public async Task<string> GetPlayerDetailsAsync(int playerId)
+        private readonly IFootballPlayerRepository _footballPlayerRepository;
+        public FootballPlayerService(IFootballPlayerRepository footballPlayerRepository)
         {
-            // Simulate an API call delay
-            await Task.Delay(500);
-
-            // Return a mock response
-            return $"Player details for Player ID: {playerId}";
+            _footballPlayerRepository = footballPlayerRepository;
         }
 
-        // Stubbed method to get the player's statistics by player ID.
-        public async Task<string> GetPlayerStatsAsync(int playerId)
+        public async Task<List<FootballPlayerModel>> GetAllPlayersAsync()
         {
-            // Simulate an API call delay
-            await Task.Delay(500);
-
-            // Return a mock response
-            return $"Player Stats for Player ID: {playerId}";
+            var players = await _footballPlayerRepository.GetAllAsync();
+            return players.ToList();
         }
 
-        // Stubbed method to retrieve all players in a specific team by team ID.
-        public async Task<List<string>> GetAllPlayersInTeamAsync(int teamId)
+        public async Task<FootballPlayerModel?> GetPlayerByIdAsync(string id)
         {
-            // Simulate an API call delay
-            await Task.Delay(500);
-
-            // Return a mock list of players
-            return new List<string> { "Player 1", "Player 2", "Player 3" };
+            return await _footballPlayerRepository.GetByIdAsync(id);
         }
 
-        // Additional player-related methods can be added here
+        public async Task<bool> CreatePlayerAsync(FootballPlayerModel player)
+        {
+            await _footballPlayerRepository.CreateAsync(player);
+            return true;
+        }
+
+        public async Task<bool> UpdatePlayerAsync(string id, FootballPlayerModel player)
+        {
+            return await _footballPlayerRepository.UpdateAsync(id, player);
+        }
+
+        public async Task<bool> DeletePlayerAsync(string id)
+        {
+            return await _footballPlayerRepository.DeleteAsync(id);
+        }
+
+        public async Task<bool> CreateManyAsync(List<FootballPlayerModel> players)
+        {
+            await _footballPlayerRepository.CreateManyAsync(players);
+            return true;
+        }
     }
 }
