@@ -20,3 +20,5 @@ wwwroot/
 *.cache
 *.dbmdl
 *.nupkg
+
+*appsettings.Testing.json**
