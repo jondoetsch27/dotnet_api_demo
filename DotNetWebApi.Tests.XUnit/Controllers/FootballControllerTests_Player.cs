@@ -13,14 +13,12 @@ namespace dotnet_api_demo.Tests.XUnit
 {
     public class FootballControllerTests
     {
-        private MongoDbRunner _mongoDbRunner;
         private IFootballTeamService _footballTeamService;
         private IFootballPlayerService _footballPlayerService;
         private FootballController _controller;
 
         public FootballControllerTests()
         {
-            _mongoDbRunner = MongoDbRunner.Start();
             var footballTeamServiceMock = new Mock<IFootballTeamService>();
             var footballPlayerServiceMock = new Mock<IFootballPlayerService>();
 
@@ -96,11 +94,6 @@ namespace dotnet_api_demo.Tests.XUnit
             _footballTeamService = footballTeamServiceMock.Object;
             _footballPlayerService = footballPlayerServiceMock.Object;
             _controller = new FootballController(_footballPlayerService, _footballTeamService);
-        }
-
-        public void Dispose()
-        {
-            _mongoDbRunner?.Dispose();
         }
 
         [Fact]

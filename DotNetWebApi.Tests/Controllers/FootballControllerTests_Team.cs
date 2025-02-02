@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Mongo2Go;
 using Microsoft.AspNetCore.Mvc;
 using dotnet_api_demo.Models;
 using dotnet_api_demo.Controllers;
@@ -14,7 +13,6 @@ namespace dotnet_api_demo.Tests
     [TestFixture]
     public class FootballControllerTests
     {
-        private MongoDbRunner _mongoDbRunner;
         private IFootballTeamService _footballTeamService;
         private IFootballPlayerService _footballPlayerService;
         private FootballController _controller;
@@ -22,7 +20,6 @@ namespace dotnet_api_demo.Tests
         [SetUp]
         public void SetUp()
         {
-            _mongoDbRunner = MongoDbRunner.Start();
             var footballTeamServiceMock = new Mock<IFootballTeamService>();
             var footballPlayerServiceMock = new Mock<IFootballPlayerService>();
 
@@ -66,12 +63,6 @@ namespace dotnet_api_demo.Tests
             _footballTeamService = footballTeamServiceMock.Object;
             _footballPlayerService = footballPlayerServiceMock.Object;
             _controller = new FootballController(_footballPlayerService, _footballTeamService);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _mongoDbRunner?.Dispose();
         }
 
         [Test]
