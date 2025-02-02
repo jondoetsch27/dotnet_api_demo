@@ -5,7 +5,7 @@ using dotnet_api_demo.Models;
 using dotnet_api_demo.Repositories;
 using dotnet_api_demo.Services;
 
-namespace dotnet_api_demo.Services
+namespace dotnet_api_demo.Services.Implementations
 {
     public class FootballTeamService : IFootballTeamService
     {
