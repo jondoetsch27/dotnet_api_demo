@@ -5,6 +5,7 @@ using dotnet_api_demo.Repositories.Implementations;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
+// TODO: figure out why auto-config not working
 builder.Configuration.AddJsonFile("appsettings.Testing.json", optional: false, reloadOnChange: true);
 builder.Services.AddSingleton<IMongoClient>(sp =>
 {
