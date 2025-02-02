@@ -63,75 +63,6 @@ namespace dotnet_api_demo.Tests
                     new FootballTeamModel { TeamCity = "Washington", TeamName = "Commanders", CurrentRoster = new List<FootballPlayerModel>() }
                 });
 
-        footballPlayerServiceMock.Setup(service => service.GetAllPlayersAsync())
-            .ReturnsAsync(new List<FootballPlayerModel>
-            {
-                new FootballPlayerModel
-                {
-                    FirstName = "Nico", 
-                    LastName = "Collins", 
-                    UniformNumber = "4", 
-                    CurrentTeam = new FootballTeamModel { TeamName = "Texans", TeamCity = "Houston" }, 
-                    TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Texans", TeamCity = "Houston" } }
-                },
-                new FootballPlayerModel
-                {
-                    FirstName = "CJ", 
-                    LastName = "Stroud", 
-                    UniformNumber = "7", 
-                    CurrentTeam = new FootballTeamModel { TeamName = "Texans", TeamCity = "Houston" }, 
-                    TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Texans", TeamCity = "Houston" } }
-                },
-                new FootballPlayerModel
-                {
-                    FirstName = "JJ", 
-                    LastName = "McCarthy", 
-                    UniformNumber = "9", 
-                    CurrentTeam = new FootballTeamModel { TeamName = "Vikins", TeamCity = "Minnesota" }, 
-                    TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Vikings", TeamCity = "Minnesota" } }
-                },
-                new FootballPlayerModel
-                {
-                    FirstName = "Blake", 
-                    LastName = "Corum", 
-                    UniformNumber = "30", 
-                    CurrentTeam = new FootballTeamModel { TeamName = "Lions", TeamCity = "Detroit" }, 
-                    TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Lions", TeamCity = "Detroit" } }
-                },
-                new FootballPlayerModel
-                {
-                    FirstName = "Jaxon", 
-                    LastName = "Smith Njigba", 
-                    UniformNumber = "11", 
-                    CurrentTeam = new FootballTeamModel { TeamName = "Seahawks", TeamCity = "Seattle" }, 
-                    TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Seahawks", TeamCity = "Seattle" } }
-                },
-                new FootballPlayerModel
-                {
-                    FirstName = "Garrett", 
-                    LastName = "Wilson", 
-                    UniformNumber = "17", 
-                    CurrentTeam = new FootballTeamModel { TeamName = "Jets", TeamCity = "New York" }, 
-                    TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Jets", TeamCity = "New York" } }
-                },
-                new FootballPlayerModel
-                {
-                    FirstName = "Chris", 
-                    LastName = "Olave", 
-                    UniformNumber = "12", 
-                    CurrentTeam = new FootballTeamModel { TeamName = "Saints", TeamCity = "New Orleans" }, 
-                    TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Saints", TeamCity = "New Orleans" } }
-                },
-                new FootballPlayerModel
-                {
-                    FirstName = "Marvin", 
-                    LastName = "Harrison Jr", 
-                    UniformNumber = "18", 
-                    CurrentTeam = new FootballTeamModel { TeamName = "Cardinals", TeamCity = "Arizona" }, 
-                    TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Cardinals", TeamCity = "Arizona" } }
-                }
-            });
-
             _footballTeamService = footballTeamServiceMock.Object;
             _footballPlayerService = footballPlayerServiceMock.Object;
             _controller = new FootballController(_footballPlayerService, _footballTeamService);
@@ -153,18 +84,6 @@ namespace dotnet_api_demo.Tests
             var teams = okResult.Value as List<FootballTeamModel>;
             teams.ShouldNotBeNull();
             teams.Count.ShouldBe(32);
-        }
-
-        [Test]
-        public async Task GetAllPlayers_ReturnsOkResult_WithPlayers()
-        {
-            var result = await _controller.GetAllPlayers();
-            var okResult = result as OkObjectResult;
-            okResult.ShouldNotBeNull();
-
-            var players = okResult.Value as List<FootballPlayerModel>;
-            players.ShouldNotBeNull();
-            players.Count.ShouldBe(8);
         }
     }
 }
