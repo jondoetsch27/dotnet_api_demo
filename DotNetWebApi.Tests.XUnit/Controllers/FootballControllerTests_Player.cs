@@ -54,8 +54,8 @@ namespace dotnet_api_demo.Tests.XUnit
                         FirstName = "Blake", 
                         LastName = "Corum", 
                         UniformNumber = "30", 
-                        CurrentTeam = new FootballTeamModel { TeamName = "Lions", TeamCity = "Detroit" }, 
-                        TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Lions", TeamCity = "Detroit" } }
+                        CurrentTeam = new FootballTeamModel { TeamName = "Rams", TeamCity = "Los Angeles" }, 
+                        TeamHistory = new List<FootballTeamModel> { new FootballTeamModel { TeamName = "Rams", TeamCity = "Los Angeles" } }
                     },
                     new FootballPlayerModel
                     {
