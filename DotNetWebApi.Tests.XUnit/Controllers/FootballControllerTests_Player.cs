@@ -1,4 +1,3 @@
-using Mongo2Go;
 using Microsoft.AspNetCore.Mvc;
 using dotnet_api_demo.Models;
 using dotnet_api_demo.Controllers;
