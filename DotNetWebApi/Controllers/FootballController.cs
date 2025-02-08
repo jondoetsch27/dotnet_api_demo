@@ -1,22 +1,15 @@
 using dotnet_api_demo.Models;
 using dotnet_api_demo.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace dotnet_api_demo.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class FootballController : ControllerBase
+    public class FootballController(IFootballPlayerService footballPlayerService, IFootballTeamService footballTeamService) : ControllerBase
     {
-        private readonly IFootballPlayerService _footballPlayerService;
-        private readonly IFootballTeamService _footballTeamService;
-        public FootballController(IFootballPlayerService footballPlayerService, IFootballTeamService footballTeamService)
-        {
-            _footballPlayerService = footballPlayerService;
-            _footballTeamService = footballTeamService;
-        }
+        private readonly IFootballPlayerService _footballPlayerService = footballPlayerService;
+        private readonly IFootballTeamService _footballTeamService = footballTeamService;
 
         [HttpGet("teams")]
         public async Task<IActionResult> GetAllTeams()
